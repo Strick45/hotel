@@ -639,6 +639,31 @@
   background: rgba(255, 255, 255, 0.3);
 }
 
+.start-onboarding-btn {
+  margin-top: 30px;
+  padding: 16px 32px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 25px;
+  background: rgba(40, 19, 138, 0.8);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.start-onboarding-btn:hover {
+  background: rgba(40, 19, 138, 1);
+  border-color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.05);
+}
+
+.start-onboarding-btn:active {
+  transform: scale(0.98);
+}
+
 /* Адаптация под мобильные */
 @media (max-width: 480px) {
   .onboarding-content h1 {
@@ -654,6 +679,11 @@
     width: 90%;
     font-size: 16px;
     padding: 12px;
+  }
+
+  .start-onboarding-btn {
+    font-size: 16px;
+    padding: 14px 28px;
   }
 }
 
