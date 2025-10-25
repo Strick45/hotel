@@ -1,0 +1,659 @@
+/* src/components/Onboarding/OnboardingScreen.css */
+@font-face {
+  font-family: 'Racama';
+  src: url('../assets/fonts/Racama.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.onboarding-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.onboarding-fullscreen.image1 {
+  background-image: url('./image 1.jpg');
+}
+
+.onboarding-fullscreen.image8 {
+  background-image: url('./8.jpg');
+}
+
+.onboarding-fullscreen.transitioning {
+  animation: scrollDownTransition 2s ease-in-out forwards;
+}
+
+@keyframes scrollDownTransition {
+  0% {
+    transform: scaleY(1) translateY(0);
+    background-color: rgba(0, 0, 0, 0);
+  }
+  50% {
+    transform: scaleY(1.2) translateY(20vh);
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    transform: scaleY(1.5) translateY(50vh);
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.onboarding-fullscreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: 'Racama', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+.onboarding-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.onboarding-content h1 {
+  font-size: 28px;
+  margin: 0 0 20px 0;
+  line-height: 1.4;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.onboarding-content .emoji {
+  font-size: 60px;
+  margin: 20px 0;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 0.3s forwards;
+}
+
+.name-input {
+  width: 80%;
+  max-width: 300px;
+  padding: 14px 18px;
+  margin-top: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  font-size: 18px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.name-input:focus {
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.account-btn {
+  margin-top: 20px;
+  padding: 12px 24px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.account-btn:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.15);
+}
+
+/* Анимации */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-out {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Chat styles */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+
+.message.bot {
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
+.message.user {
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+  margin-left: auto;
+}
+
+.bot-avatar,
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin: 0 8px;
+  flex-shrink: 0;
+}
+
+.bot-avatar img,
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.message-content {
+  max-width: 70%;
+  padding: 5px 10px;
+  border-radius: 16px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+  position: relative;
+  display: inline-block;
+}
+
+.message.user .message-content {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.emoji {
+  font-size: 20px;
+  margin-top: 4px;
+}
+
+.chat-input-container {
+  position: sticky;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 12px;
+  border-radius: 20px;
+  margin-top: 10px;
+  backdrop-filter: blur(10px);
+}
+
+.chat-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  background: white;
+  color: #333;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.chat-input:focus {
+  border-color: #007AFF;
+}
+
+.gender-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.gender-btn {
+  padding: 9px 35px;
+  border: none;
+  border-radius: 10px;
+  background: #28138A;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 5px;
+}
+
+.gender-btn:hover {
+  background: #3a1bb8;
+}
+
+.season-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.season-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.season-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.duration-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.duration-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.duration-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.budget-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.budget-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.budget-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.rest-type-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.rest-type-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.rest-type-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.trip-format-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.trip-format-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.trip-format-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.accommodation-buttons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 10px;
+  max-width: 250px;
+}
+
+.accommodation-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.accommodation-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.cuisine-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.cuisine-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cuisine-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.dining-format-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.dining-format-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dining-format-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.food-budget-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.food-budget-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.food-budget-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.interests-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.interests-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.interests-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.non-standard-routes-buttons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 10px;
+  max-width: 250px;
+}
+
+.non-standard-routes-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.non-standard-routes-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.city-transport-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.city-transport-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.city-transport-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.route-format-buttons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 10px;
+  max-width: 300px;
+}
+
+.route-format-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.route-format-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.trip-mood-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.trip-mood-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.trip-mood-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.place-preference-buttons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 10px;
+  max-width: 300px;
+}
+
+.place-preference-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.place-preference-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.weather-time-routes-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.weather-time-routes-btn {
+  padding: 10px 30px;
+  border: none;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.weather-time-routes-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Адаптация под мобильные */
+@media (max-width: 480px) {
+  .onboarding-content h1 {
+    font-size: 24px;
+    padding: 0 15px;
+  }
+
+  .onboarding-content .emoji {
+    font-size: 50px;
+  }
+
+  .name-input {
+    width: 90%;
+    font-size: 16px;
+    padding: 12px;
+  }
+}
+
